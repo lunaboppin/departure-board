@@ -24,6 +24,7 @@ To deploy this project run
   cd api
   docker build -t browserpuppeteer-app
   docker run -d -p 3042:3042 browserpuppeteer-app
+  cd ..
   python3 -m venv myenv
   source myenv/bin/activate
   pip install -r requirements.txt
