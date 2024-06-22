@@ -1,4 +1,4 @@
-# Northern Ireland Departure board recreated in Python for a Raspberry Pi LCD Screen
+# Northern Ireland Railways departure board recreated in Python for a Raspberry Pi LCD Screen
 
 
 Uses the Worldline Tiger API to fetch the data. Uses a NodeJS API running pupeteer to fetch the credentials and return back to the python script which calls the Tiger API.
