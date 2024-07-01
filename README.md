@@ -39,11 +39,11 @@ http://127.0.0.1:3042/api/location
 
 ## Screenshots
 
-![Fetching](https://cdn.discordapp.com/attachments/1244834155901222923/1253927608996069417/20240622_051755.jpg?ex=6677a296&is=66765116&hm=21ecaa02de8a7e48df146416da85848c8f36679b7ea1d4320381f73c171a40d9&)
+![Fetching](https://raw.githubusercontent.com/boppinluna/departure-board/main/img/fetching.jpg)
 
-![Platform 2 at Lanyon Place](https://cdn.discordapp.com/attachments/1244834155901222923/1253927609952243732/20240622_051814.jpg?ex=6677a297&is=66765117&hm=7d3c2bb7f61cf333cb1936c54c68b062a324eb1f22d48f65133fe7495b684555&)
+![Platform 2 at Lanyon Place](https://raw.githubusercontent.com/boppinluna/departure-board/main/img/dublin.jpg)
 
-![No Trains](https://cdn.discordapp.com/attachments/1244834155901222923/1253927610803556423/20240622_051937.jpg?ex=6677a297&is=66765117&hm=427a8b513abc602d435fd2efd50ed6d7969b3ce7c5ea36d169dbcd407f546b65&)
+![No Trains](https://raw.githubusercontent.com/boppinluna/departure-board/main/img/notrains.jpg)
 
-![Coleraine](https://cdn.discordapp.com/attachments/1244834155901222923/1253927776499798046/image.png?ex=6677a2be&is=6676513e&hm=99a00a85dadd52af32a8a30b511ca0be4dc0085bba992c42a0376bd6eecd04b5&)
+![Coleraine](https://raw.githubusercontent.com/boppinluna/departure-board/main/img/station.png)
 
