@@ -132,6 +132,7 @@ async def main():
         "BL": {"name": "Balmoral", "totalPlatforms": 2},
         "BR": {"name": "Bangor", "totalPlatforms": 3},
         "BW": {"name": "Bangor West", "totalPlatforms": 2},
+        "GC": {"name": "Belfast Grand Central", "totalPlatforms": 8},
         "BN": {"name": "Bellarena", "totalPlatforms": 2},
         "BT": {"name": "Botanic", "totalPlatforms": 2},
         "CA": {"name": "Carnalea", "totalPlatforms": 2},
