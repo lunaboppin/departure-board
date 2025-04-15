@@ -16,18 +16,8 @@ button = Button(2)
 
 load_dotenv()
 
-APIURL = os.getenv('APIURL')
-
-selectedStation = 'CL'
+selectedStation = 'GC'
 rotateStations = True
-
-async def get_credentials():
-    global selectedStation
-    url = APIURL
-    data = {'location': selectedStation}
-    response = requests.post(url, json=data)
-    dataJSON = response.json()
-    return dataJSON['x_amz_date'], dataJSON['authorization']
 
 def get_next_train(api_url, headers, platform):
     response = requests.get(api_url, headers=headers)
@@ -111,12 +101,13 @@ def update_display(disp, train, matrixFont, x_position, station_name, matrixFont
 
 async def main():
     global selectedStation
-    api_url = "https://tiger-api.worldline.global/services/" + selectedStation
+    api_url = "https://tiger-api-portal.worldline.global/services/" + selectedStation
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0",
         "Accept": "application/json",
         "Accept-Language": "en-US,en;q=0.5",
         "x-api-key": "JsfAqhmRuO88ndFxs6VG47Z5dXRB8YZB7Dy4xWXN",
+        "x-amz-date": "20240312T191852+0000",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type,Access-Control-Allow-Origin,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
     }
@@ -132,7 +123,6 @@ async def main():
         "BL": {"name": "Balmoral", "totalPlatforms": 2},
         "BR": {"name": "Bangor", "totalPlatforms": 3},
         "BW": {"name": "Bangor West", "totalPlatforms": 2},
-        "GC": {"name": "Belfast Grand Central", "totalPlatforms": 8, "showNext": True},
         "BN": {"name": "Bellarena", "totalPlatforms": 2},
         "BT": {"name": "Botanic", "totalPlatforms": 2},
         "CA": {"name": "Carnalea", "totalPlatforms": 2},
@@ -152,6 +142,7 @@ async def main():
         "DM": {"name": "Dunmurry", "totalPlatforms": 2},
         "FY": {"name": "Finaghy", "totalPlatforms": 2},
         "GN": {"name": "Glynn", "totalPlatforms": 1},
+        "GV": {"name": "Great Victoria St", "totalPlatforms": 4},
         "GD": {"name": "Greenisland", "totalPlatforms": 2},
         "HB": {"name": "Helen's Bay", "totalPlatforms": 2},
         "HD": {"name": "Hilden", "totalPlatforms": 2},
@@ -203,9 +194,6 @@ async def main():
         disp.ShowImage(splashScreen)
         x_position = disp.width
 
-        x_amz_date, authorization = await get_credentials()
-        headers["x-amz-date"] = x_amz_date
-        headers["Authorization"] = authorization
         last_credential_time = datetime.datetime.now()
         last_random_station = datetime.datetime.now()
 
@@ -214,22 +202,13 @@ async def main():
 
         while True:
             current_time = datetime.datetime.now()
-            if (current_time - last_credential_time).seconds >= 300:
-                x_amz_date, authorization = await get_credentials()
-                headers["x-amz-date"] = x_amz_date
-                headers["Authorization"] = authorization
-                last_credential_time = current_time
 
             if ((current_time - last_random_station).seconds >= 830 and rotateStations) or button.is_pressed:
                 random_station_code = random.choice(list(stations.keys()))
                 selectedStation = random_station_code
                 last_random_station = current_time
                 currentPlatform = 1
-                api_url = "https://tiger-api.worldline.global/services/" + selectedStation
-                x_amz_date, authorization = await get_credentials()
-                headers["x-amz-date"] = x_amz_date
-                headers["Authorization"] = authorization
-                last_credential_time = current_time
+                api_url = "https://tiger-api-portal.worldline.global/services/" + selectedStation
                 
                 consecutive_failures = 0
                 last_fetch_time = current_time

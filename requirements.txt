@@ -1,0 +1,7 @@
+RPi.GPIO
+requests
+pillow
+python-dotenv
+gpiozero
+spidev
+numpy
