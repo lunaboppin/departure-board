@@ -46,11 +46,11 @@ def update_display(disp, train, matrixFont, x_position, station_name, matrixFont
     destination_text = train['Destinations']['Front']['Name']
     destinationTerminating_text = train['Origins']['Front']['Name']
     platform = train['Platform']
-    status_text = train['ArrStatus']
+    status_text = train['DepStatus']
     if status_text == "Exp":
-        status_text = train['ETA']
+        status_text = train['ETD']
     if secondTrain:
-        secondTrainTime = secondTrain['Destinations']['Front']['STA']
+        secondTrainTime = secondTrain['Origins']['Front']['STD']
         secondTrainDestination = secondTrain['Destinations']['Front']['Name']
 
     # Scrolling text settings
