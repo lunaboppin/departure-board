@@ -28,6 +28,8 @@ def get_next_train(api_url, headers, platform):
         second_train = None
 
         for service in data['services']:
+            if service['Destinations']['Front']['TIPLOC'] == selectedStation:
+                continue
             if service['Platform'] == platform:
                 if first_train is None:
                     first_train = service
@@ -141,6 +143,7 @@ async def main():
         "DK": {"name": "Dundalk", "totalPlatforms": 2},
         "DM": {"name": "Dunmurry", "totalPlatforms": 2},
         "FY": {"name": "Finaghy", "totalPlatforms": 2},
+        "GC": {"name": "Belfast Grand Central", "totalPlatforms": 8, "showNext": True},
         "GN": {"name": "Glynn", "totalPlatforms": 1},
         "GV": {"name": "Great Victoria St", "totalPlatforms": 4},
         "GD": {"name": "Greenisland", "totalPlatforms": 2},
@@ -173,8 +176,6 @@ async def main():
         "WT": {"name": "Whitehead", "totalPlatforms": 2},
         "YG": {"name": "York Street", "totalPlatforms": 2}
     }
-
-
 
     logging.basicConfig(level=logging.DEBUG)
     currentPlatform = 1
