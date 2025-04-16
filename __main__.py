@@ -57,6 +57,8 @@ def update_display(disp, train, matrixFont, x_position, station_name, matrixFont
     if secondTrain:
         secondTrainTime = secondTrain['Origins']['Front']['STD']
         secondTrainDestination = secondTrain['Destinations']['Front']['Name']
+        if secondTrainDestination == "Belfast Grand Central":
+            secondTrainDestination = "Grand Central"
 
     # Scrolling text settings
     calling_at_text = ""
