@@ -1,4 +1,5 @@
 import os
+import socket
 import sys
 import time
 import logging
@@ -45,6 +46,10 @@ def get_next_train(api_url, headers, platform):
 def update_display(disp, train, matrixFont, x_position, station_name, matrixFontSmaller, secondTrain):
     destination_text = train['Destinations']['Front']['Name']
     destinationTerminating_text = train['Origins']['Front']['Name']
+    if destination_text == "Belfast Grand Central":
+        destination_text = "Grand Central"
+    if destinationTerminating_text == "Belfast Grand Central":
+        destinationTerminating_text = "Grand Central"
     platform = train['Platform']
     status_text = train['DepStatus']
     if status_text == "Exp":
@@ -100,6 +105,19 @@ def update_display(disp, train, matrixFont, x_position, station_name, matrixFont
     disp.ShowImage(image1)
 
     return x_position
+
+def getIp():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.settimeout(0)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('10.254.254.254', 1))
+        IP = s.getsockname()[0]
+    except Exception:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
 
 async def main():
     global selectedStation
@@ -190,12 +208,18 @@ async def main():
 
         splashScreen = Image.new("RGB", (disp.height, disp.width), "BLACK")
         draw = ImageDraw.Draw(splashScreen)
-        draw.text((10, 100), "Fetching train data...", fill="ORANGE", font=matrixFont)
+        draw.text((10, 10), "IP Address:\n" + getIp(), fill="ORANGE", font=matrixFont)
         splashScreen = splashScreen.rotate(0)
         disp.ShowImage(splashScreen)
+        time.sleep(5)
+
+        splashScreen2 = Image.new("RGB", (disp.height, disp.width), "BLACK")
+        draw = ImageDraw.Draw(splashScreen2)
+        draw.text((10, 100), "Fetching train data...", fill="ORANGE", font=matrixFont)
+        splashScreen2 = splashScreen2.rotate(0)
+        disp.ShowImage(splashScreen2)
         x_position = disp.width
 
-        last_credential_time = datetime.datetime.now()
         last_random_station = datetime.datetime.now()
 
         train, secondTrain, currentStation = get_next_train(api_url, headers, str(currentPlatform))
